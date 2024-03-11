@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  font-weight: bold;
+}
+
+header img {
+  height: 60px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shoppingbag {
+  width: 25%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  display: flex;
+}
+
+.shoppingButtons {
+  background-color: aqua;
+  display: flex;
+}
+
+.container {
+  width: 75%;
+}
+
+.titlepic img {
+  width: 100%;
+  object-fit: cover;
+  height: 250px;
+}
+
+.icons-header img {
+  height: 20px;
+  width: 30px;
+  object-fit: cover;
+  margin-right: 20px;
+  padding: 10px 10px;
+  border-radius: 90px;
+}
+
+.icons-header img:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.cart {
+  height: 50px;
+  object-fit: cover;
+  padding-top: 100px;
+}
+
+.img-button {
+  height: 16px !important;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons a {
+  margin-left: 16px;
+}
+
+.container-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons-main img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+
+.icons-main button {
+  border-radius: 90px;
+  border: none;
+  padding: 10px 10px;
+  margin-right: 10px;
+}
+
+.icons-main button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.icons-main {
+  margin-top: 30px;
+  margin-right: 50px;
+}
+
+.structure-main {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 50px;
+}
