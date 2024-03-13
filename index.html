@@ -9,7 +9,7 @@
 
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="cardFullcorn()">
     <header>
       <img src="img/logo.png" alt="Logo" />
       <span>Speisekarte</span>
@@ -42,68 +42,16 @@
               <a href="#"
                 ><img class="img-button" src="img/search.svg" alt="search"
               /></a>
-              <a href="">Vollkorn-Bun</a>
-              <a href="">Weizen-Bun</a>
-              <a href="">Dinkel-Bun</a>
+              <a onclick="cardFullcorn(); return false" href="">Vollkorn-Bun</a>
+              <a onclick="cardWheat(); return false;" href="">Weizen-Bun</a>
+              <a onclick="cardDinkel(); return false;" href="">Dinkel-Bun</a>
             </div>
           </div>
         </div>
 
-        <section class="menu-container">
-          <h2>Vollkorn-Bun</h2>
-          <div class="menu">
-            <div class="menu-card">
-              <div class="card-header">
-                <h3>Art des Sandwichs</h3>
-                <img src="img/plus-circle.svg" alt="" />
-              </div>
-              <div class="card-main">
-                <div class="card-text">
-                  <div class="text-description">
-                    <span>Zutaten</span>
-                    <span>kleinere Info</span>
-                  </div>
-                  <span><b>Preis</b></span>
-                </div>
-                <img src="img/sandwich-schinken.jpg" alt="" />
-              </div>
-            </div>
-
-            <div class="menu-card">
-              <div class="card-header">
-                <h3>Art des Sandwichs</h3>
-                <img src="img/plus-circle.svg" alt="" />
-              </div>
-              <div class="card-main">
-                <div class="card-text">
-                  <div class="text-description">
-                    <span>Zutaten</span>
-                    <span>kleinere Info</span>
-                  </div>
-                  <span><b>Preis</b></span>
-                </div>
-                <img src="img/sandwich-schinken.jpg" alt="" />
-              </div>
-            </div>
-
-            <div class="menu-card">
-              <div class="card-header">
-                <h3>Art des Sandwichs</h3>
-                <img src="img/plus-circle.svg" alt="" />
-              </div>
-              <div class="card-main">
-                <div class="card-text">
-                  <div class="text-description">
-                    <span>Zutaten</span>
-                    <span>kleinere Info</span>
-                  </div>
-                  <span><b>Preis</b></span>
-                </div>
-                <img src="img/sandwich-schinken.jpg" alt="" />
-              </div>
-            </div>
-          </div>
+        <section id="menu" class="menu-container">
         </section>
+
       </div>
       <div class="shoppingbag">
         <h2>Warenkorb</h2>
