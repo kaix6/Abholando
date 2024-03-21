@@ -1,8 +1,3 @@
-let foodList = [
-  "Schinken-Sandwich",
-  "Vegetarisches-Sandwich",
-  "Spezial-Sandwich",
-];
 let priceList = [7.95, 6.95, 9.95];
 let imgList = [
   "img/sandwich-schinken.jpg",
@@ -23,6 +18,11 @@ let incredientListFullcorn = [
   "Vollkorn-Bun, Salat, Gurke, Tomate, Zwiebel, Sauce",
   "Guacamole",
 ];
+let foodListFullcorn = [
+  "Vollkorn Schinken-Sandwich",
+  "Vollkorn Vegetarisches-Sandwich",
+  "Vollkorn Spezial-Sandwich",
+];
 //////////////////////////////Vollkorn-Arrays/////////////////////////////////////
 //////////////////////////////Weizen-Arrays///////////////////////////////////////
 let incredientListWheat = [
@@ -30,6 +30,11 @@ let incredientListWheat = [
   "Weizen-Bun, Salat, Gurke, Tomate, Zwiebel, Sauce",
   "Weizen-Bun, Salat, Gurke, Tomate, Zwiebel, Sauce",
   "Guacamole",
+];
+let foodListWheat = [
+  "Weizen Schinken-Sandwich",
+  "Weizen Vegetarisches-Sandwich",
+  "Weizen Spezial-Sandwich",
 ];
 //////////////////////////////Weizen-Arrays///////////////////////////////////////
 //////////////////////////////Dinkel-Arrays///////////////////////////////////////
@@ -39,6 +44,11 @@ let incredientListDinkel = [
   "Dinkel-Bun, Salat, Gurke, Tomate, Zwiebel, Sauce",
   "Guacamole",
 ];
+let foodListDinkel = [
+  "Dinkel Schinken-Sandwich",
+  "Dinkel Vegetarisches-Sandwich",
+  "Dinkel Spezial-Sandwich",
+];
 //////////////////////////////Dinkel-Arrays///////////////////////////////////////
 
 function cardFullcorn() {
@@ -46,8 +56,8 @@ function cardFullcorn() {
   const headline = headlineList[0];
   card.innerHTML = "";
   card.innerHTML = `<h2>${headline}</h2>`;
-  for (let i = 0; i < foodList.length; i++) {
-    const food = foodList[i];
+  for (let i = 0; i < foodListFullcorn.length; i++) {
+    const food = foodListFullcorn[i];
     const incredient = incredientListFullcorn[i];
     const price = priceList[i];
     const img = imgList[i];
@@ -79,8 +89,8 @@ function cardWheat() {
   const headline = headlineList[1];
   card.innerHTML = "";
   card.innerHTML = `<h2>${headline}</h2>`;
-  for (let i = 0; i < foodList.length; i++) {
-    const food = foodList[i];
+  for (let i = 0; i < foodListWheat.length; i++) {
+    const food = foodListWheat[i];
     const incredient = incredientListWheat[i];
     const price = priceList[i];
     const img = imgList[i];
@@ -112,8 +122,8 @@ function cardDinkel() {
   const headline = headlineList[2];
   card.innerHTML = "";
   card.innerHTML = `<h2>${headline}</h2>`;
-  for (let i = 0; i < foodList.length; i++) {
-    const food = foodList[i];
+  for (let i = 0; i < foodListDinkel.length; i++) {
+    const food = foodListDinkel[i];
     const incredient = incredientListDinkel[i];
     const price = priceList[i];
     const img = imgList[i];
@@ -183,9 +193,9 @@ function updateBasketDisplay() {
       <div class="space-between">
         <a class="notiz" href="#">Anmerkung hinzufügen</a>
         <div class="icons-bag">
-        <img src="img/plus-circle.svg" alt="" />
+        <img onclick="removeToBasket('${food}','${price}')" src="img/dash-circle.svg" alt="" />
         <span class="margin">${amount}</span>
-        <img src="img/plus-circle.svg" alt="" />
+        <img onclick="addToBasket('${food}','${price}')" src="img/plus-circle.svg" alt="" />
         </div>
       </div>
     </div> 
@@ -211,4 +221,22 @@ function updateBasketDisplay() {
   </div>
   <button class="buy-button">Bezahlen</button>
 </div>`;
+}
+
+function removeToBasket(food, price) {
+  const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
+
+  if (index !== -1) {
+    // Wenn das Essen bereits im Warenkorb ist, verringer die Menge
+    basketAmount[index]--;
+  }
+
+  if (basketAmount[index] < 1) {
+    basketFood.splice(index, 1);
+    basketPrices.splice(index, 1);
+    basketAmount.splice(index, 1);
+  }
+
+  // Aktualisiere die Anzeige des Warenkorbs
+  updateBasketDisplay();
 }
