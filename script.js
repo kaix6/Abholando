@@ -10,6 +10,7 @@ let headlineList = ["Vollkorn-Bun", "Weizen-Bun", "Dinkel-Bun"];
 let basketFood = [];
 let basketPrices = [];
 let basketAmount = [];
+let basketSum = [];
 
 //////////////////////////////Vollkorn-Arrays/////////////////////////////////////
 let incredientListFullcorn = [
@@ -150,13 +151,6 @@ function cardDinkel() {
   }
 }
 
-function shoppingBagNone() {
-  const emptyBag = document.getElementById("shopping-bag-none-food");
-  const fillBag = document.getElementById("shopping-bag-with-food");
-  emptyBag.classList.add("display-none");
-  fillBag.classList.remove("display-none");
-}
-
 function addToBasket(food, price) {
   shoppingBagNone();
   const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
@@ -173,6 +167,33 @@ function addToBasket(food, price) {
 
   // Aktualisiere die Anzeige des Warenkorbs
   updateBasketDisplay();
+  practialSum();
+}
+
+function shoppingBagNone() {
+  const emptyBag = document.getElementById("shopping-bag-none-food");
+  const fillBag = document.getElementById("shopping-bag-with-food");
+  emptyBag.classList.add("display-none");
+  fillBag.classList.remove("display-none");
+}
+
+function removeToBasket(food, price) {
+  const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
+
+  if (index !== -1) {
+    // Wenn das Essen bereits im Warenkorb ist, verringer die Menge
+    basketAmount[index]--;
+  }
+
+  if (basketAmount[index] < 1) {
+    basketFood.splice(index, 1);
+    basketPrices.splice(index, 1);
+    basketAmount.splice(index, 1);
+  }
+
+  // Aktualisiere die Anzeige des Warenkorbs
+  updateBasketDisplay();
+  practialSum();
 }
 
 function updateBasketDisplay() {
@@ -205,38 +226,37 @@ function updateBasketDisplay() {
   basketList.innerHTML += `<div class="sum">
 <div class="space-between">
     <span>Zwischensumme</span>
-    <span>Preis</span>
+    <span id="sum"></span>
   </div>
   <div class="space-between">
     <span>Lieferkosten</span>
-    <span>Preis</span>
-  </div>
-  <div class="space-between">
-    <span>Servicegebühr</span>
-    <span>Preis</span>
+    <span>4,99 €</span>
   </div>
   <div class="space-between">
     <span><b>Gesamt</b></span>
-    <span><b>Preis</b></span>
+    <span id="total" ><b>Preis</b></span>
   </div>
   <button class="buy-button">Bezahlen</button>
 </div>`;
 }
 
-function removeToBasket(food, price) {
-  const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
-
-  if (index !== -1) {
-    // Wenn das Essen bereits im Warenkorb ist, verringer die Menge
-    basketAmount[index]--;
+function practialSum() {
+  basketSum = [];
+  for (let i = 0; i < basketPrices.length; i++) {
+    const price = basketPrices[i];
+    const amount = basketAmount[i];
+    const subtotal = price * amount;
+    basketSum.push(subtotal);
   }
+  const sum = basketSum.reduce((total, price) => total + price, 0);
+  const sumElement = document.getElementById("sum");
+  sumElement.textContent = sum.toFixed(2) + " €";
+  totalSum();
+}
 
-  if (basketAmount[index] < 1) {
-    basketFood.splice(index, 1);
-    basketPrices.splice(index, 1);
-    basketAmount.splice(index, 1);
-  }
-
-  // Aktualisiere die Anzeige des Warenkorbs
-  updateBasketDisplay();
+function totalSum() {
+  const sum = basketSum.reduce((total, price) => total + price, 0);
+  const totalSum = sum + 4.99;
+  const totalSumElement = document.getElementById("total");
+  totalSumElement.textContent = totalSum.toFixed(2) + " €";
 }
