@@ -224,6 +224,7 @@ function updateBasketDisplay() {
     `;
   }
   basketList.innerHTML += `<div class="sum">
+  <div class="row">
 <div class="space-between">
     <span>Zwischensumme</span>
     <span id="sum"></span>
@@ -235,6 +236,7 @@ function updateBasketDisplay() {
   <div class="space-between">
     <span><b>Gesamt</b></span>
     <span id="total" ><b>Preis</b></span>
+  </div>
   </div>
   <button class="buy-button">Bezahlen</button>
 </div>`;

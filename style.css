@@ -336,3 +336,78 @@ footer {
   opacity: 0.8;
   cursor: pointer;
 }
+
+@media(max-width: 1090px) {
+  .space-between {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .notiz {
+    display: none;
+  }
+
+  .spacer {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .text-decoration {
+    margin-bottom: 5px;
+  }
+
+  .space-between {
+    margin-bottom: 8px;
+  }
+
+  .bag-list {
+    font-size: 15px;
+  }
+
+  .structure-main {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media(max-width:850px) {
+  .buttons a {
+    margin-left: 0px;
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .card-header {
+    font-size: 14px;
+  }
+
+  .card-main img {
+    width:150px;
+    height: 100px;
+  }
+
+  .text-description {
+    font-size: 14px;
+  }
+}
+
+@media(max-width:700px) {
+  .shoppingbag {
+    display: none;
+  }
+
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
