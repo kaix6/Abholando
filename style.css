@@ -366,7 +366,6 @@ footer a:hover {
 
 .responsiveButton {
   height: 50px;
-  border-radius: 90px;
   border: none;
   color: white;
   font-weight: bold;
@@ -380,9 +379,9 @@ footer a:hover {
 }
 
 #shoppingBagToggle {
-  position: fixed;
+  position: absolute;
   right: 20px;
-  top: 50%;
+  top: 100px;
 }
 
 .shoppingBagResponsive {
@@ -396,6 +395,11 @@ footer a:hover {
 
 .responsiveImg {
   display: none;
+}
+
+.responsiveImg:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 @media (max-width: 1090px) {

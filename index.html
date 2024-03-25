@@ -8,7 +8,7 @@
     <link rel="icon" type="image/vnd.microsoft.icon" href="img/favicon.ico" />
     <script src="script.js"></script>
   </head>
-  <body onload="cardFullcorn()">
+  <body onload="updateCard(foodListFullcorn, incredientListFullcorn, 0)">
     <header id="header">
       <img src="img/logo.png" alt="Logo" />
       <span>Speisekarte</span>
@@ -41,9 +41,9 @@
               <a href="#"
                 ><img class="img-button" src="img/search.svg" alt="search"
               /></a>
-              <a onclick="cardFullcorn(); return false" href="">Vollkorn-Bun</a>
-              <a onclick="cardWheat(); return false;" href="">Weizen-Bun</a>
-              <a onclick="cardDinkel(); return false;" href="">Dinkel-Bun</a>
+              <a onclick="updateCard(foodListFullcorn, incredientListFullcorn, 0); return false" href="">Vollkorn-Bun</a>
+              <a onclick="updateCard(foodListWheat, incredientListWheat, 1); return false;" href="">Weizen-Bun</a>
+              <a onclick="updateCard(foodListDinkel, incredientListDinkel, 2); return false;" href="">Dinkel-Bun</a>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
       <img
         onclick="responsiveMenuShow()"
         class="responsiveButton"
-        src="img/arrow-bar-left.svg"
+        src="img/cart2.svg"
       />
     </div>
     <footer id="footer">

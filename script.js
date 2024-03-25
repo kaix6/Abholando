@@ -63,45 +63,38 @@ function updateCard(foodList, incredientList, headlineIndex) {
     const incredient = incredientList[i];
     const price = priceList[i];
     const img = imgList[i];
-    card.innerHTML += `
-    <div class="menu">
-    <div class="menu-card">
-      <div class="card-header">
-        <h3>${food}</h3>
-        <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
-      </div>
-      <div class="card-main">
-        <div class="card-text">
-          <div class="text-description">
-            <span>${incredient}</span>
-            <span>Wahlweise als 15cm oder 30cm Sandwich</span>
-          </div>
-          <span><b>${price} €</b></span>
-        </div>
-        <img src="${img}" alt="" />
-      </div>
-    </div>
-    </div>`;
+    card.innerHTML += HTMLupdateCard(food, incredient, price, img);
   }
 }
 
-function cardFullcorn() {
-  updateCard(foodListFullcorn, incredientListFullcorn, 0);
-}
-
-function cardWheat() {
-  updateCard(foodListWheat, incredientListWheat, 1);
-}
-
-function cardDinkel() {
-  updateCard(foodListDinkel, incredientListDinkel, 2);
+function HTMLupdateCard(food, incredient, price, img) {
+  return `
+  <div class="menu">
+  <div class="menu-card">
+    <div class="card-header">
+      <h3>${food}</h3>
+      <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
+    </div>
+    <div class="card-main">
+      <div class="card-text">
+        <div class="text-description">
+          <span>${incredient}</span>
+          <span>Wahlweise als 15cm oder 30cm Sandwich</span>
+        </div>
+        <span><b>${price} €</b></span>
+      </div>
+      <img src="${img}" alt="" />
+    </div>
+  </div>
+  </div>`;
 }
 
 function addToBasket(food, price) {
   shoppingBagNone();
   const index = basketFood.indexOf(food);
 
-  if (index !== -1) { // prüft ob schon vorhanden
+  if (index !== -1) {
+    // prüft ob schon vorhanden
     basketAmount[index]++; // wenn ja, dann erhöhe um 1
   } else {
     basketFood.push(food); // wenn nein, dann füge alles hinzu
@@ -115,11 +108,13 @@ function addToBasket(food, price) {
 function removeToBasket(food, price) {
   const index = basketFood.indexOf(food);
 
-  if (index !== -1) { // prüft ob schon vorhanden
-    basketAmount[index]--;  // wenn ja, dann verringere um 1
+  if (index !== -1) {
+    // prüft ob schon vorhanden
+    basketAmount[index]--; // wenn ja, dann verringere um 1
   }
 
-  if (basketAmount[index] < 1) { // wenn kleiner 1, dann lösche alles
+  if (basketAmount[index] < 1) {
+    // wenn kleiner 1, dann lösche alles
     basketFood.splice(index, 1);
     basketPrices.splice(index, 1);
     basketAmount.splice(index, 1);
@@ -129,8 +124,9 @@ function removeToBasket(food, price) {
 }
 
 function updateBasket() {
-  updateBasketDisplay(); 
-  if (deliveryOption === "pickup") { // prüft ob Abholen oder Liefern
+  updateBasketDisplay();
+  if (deliveryOption === "pickup") {
+    // prüft ob Abholen oder Liefern
     practialSum("pickup");
   } else {
     practialSum("deliver");
@@ -282,7 +278,8 @@ function responsiveMenuBagClose() {
   const header = document.getElementById("header");
   const container = document.getElementById("container");
 
-  if (window.matchMedia("(max-width: 700px)").matches) { //überprüft ob Fenster unter 700px ist
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    //überprüft ob Fenster unter 700px ist
     toggleElementDisplay(bag, "none");
   }
 
@@ -300,9 +297,11 @@ function showBag() {
 
 function handleWindowResize() {
   const bag = document.getElementById("shoppingBag");
-  if (window.innerWidth > 700) { // prüft ob fenster größer 700px 
+  if (window.innerWidth > 700) {
+    // prüft ob fenster größer 700px
     showBag();
-  } else if (bag.style.display !== "none") { // wenn nein, dann wird geprüft ob display=none ist
+  } else if (bag.style.display !== "none") {
+    // wenn nein, dann wird geprüft ob display=none ist
     responsiveMenuBagClose();
   }
 }
