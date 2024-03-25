@@ -361,6 +361,7 @@ footer a:hover {
   right: 20px;
   top: 50vh;
   z-index: 999; /* Stelle sicher, dass der Button über anderen Inhalten liegt */
+  display: none;
 }
 
 .responsiveButton {
@@ -382,17 +383,19 @@ footer a:hover {
   position: fixed;
   right: 20px;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 999; /* Stelle sicher, dass der Button über anderen Inhalten liegt */
 }
 
 .shoppingBagResponsive {
   display: flex;
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: white;
+}
+
+.responsiveImg {
+  display: none;
 }
 
 @media (max-width: 1090px) {
@@ -450,6 +453,23 @@ background-color: white;
   .text-description {
     font-size: 14px;
   }
+
+  .shoppingbag {
+    display: flex;
+  }
+
+  .responsive-h3-empty {
+    font-size: 16px;
+  }
+
+  .responsive-span-empty {
+    font-size: 14px;
+  }
+
+  .responsive-div-empty {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -472,4 +492,125 @@ background-color: white;
   .container {
     width: 100vw;
   }
+
+  .imgResponsive {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 16px;
   }
+
+  .responsiveMenu {
+    display: block;
+  }
+
+  #shoppingBagToggle.display-none {
+    display: none !important;
+  }
+
+  .responsiveImg {
+    display: block;
+  }
+
+  .thanks-h1 {
+    font-size: 20px;
+    padding-left: 20px;
+  }
+
+  .thanks-p {
+    font-size: 12px;
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .icons-main {
+    margin: 0;
+    margin-top: 20px;
+  }
+
+  .icons-main img {
+    height: 15px;
+    width: 15px;
+    object-fit: cover;
+  }
+  
+  .icons-main button {
+    border-radius: 90px;
+    border: none;
+    padding: 10px 10px;
+    margin-right: 10px;
+  }
+
+  .container-main h1 {
+    font-size: 20px;
+  }
+
+  header img {
+    height: 40px;
+  }
+
+  header {
+    height: 60px;
+  }
+
+  .icons-header img {
+    margin: 0;
+    height: 15px;
+    width: 20px;
+  }
+
+  .structure-main {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .buttons a {
+   font-size: 14px;
+  }
+
+  .menu-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .responsiveMenu img {
+    height: 30px;
+  }
+
+  .card-header {
+    font-size: 12px;
+  }
+
+  .card-main img {
+    width: 120px;
+    height: 80px;
+  }
+
+  .text-description {
+    font-size: 12px;
+  }
+
+  .card-header img {
+    height: 20px;
+  }
+
+  footer a {
+    font-size: 10px;
+  }
+
+  footer {
+    height: 50px;
+  }
+
+  .thanks-h1 {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+  .thanks-p {
+    font-size: 10px;
+    padding-left: 10px;
+  }
+}

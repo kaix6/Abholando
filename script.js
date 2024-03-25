@@ -313,9 +313,58 @@ function thanksSite() {
 
 function responsiveMenuShow() {
   bag = document.getElementById("shoppingBag");
-  toggle = document.getElementById('shoppingBagToggle');
+  toggle = document.getElementById("shoppingBagToggle");
+  header = document.getElementById("header");
+  container = document.getElementById("container");
+
+  // Ausblenden des Toggle-Elements, wenn das Menü geöffnet wird
+  toggle.classList.add("display-none");
+
   bag.style.removeProperty("display");
-  bag.style.setProperty('display', 'flex');
+  bag.style.setProperty("display", "flex");
   bag.classList.add("shoppingBagResponsive");
-  toggle.classList.add('display-none')
+  header.classList.add("display-none");
+  container.classList.add("display-none");
 }
+
+function responsiveMenuBagClose() {
+  bag = document.getElementById("shoppingBag");
+  toggle = document.getElementById("shoppingBagToggle");
+  header = document.getElementById("header");
+  container = document.getElementById("container");
+
+  // Prüfe, ob das Fenster eine Breite von maximal 700px hat
+  if (window.matchMedia("(max-width: 700px)").matches) {
+    bag.style.removeProperty("display");
+    bag.style.setProperty("display", "none");
+  }
+
+  bag.classList.remove("shoppingBagResponsive");
+  toggle.classList.remove("display-none");
+  header.classList.remove("display-none");
+  container.classList.remove("display-none");
+
+  // Manuell entferne die Klasse 'display-none' vom Container
+  document.querySelector(".responsiveMenu").classList.remove("display-none");
+}
+
+// Funktion, die die Eigenschaft 'display: none;' entfernt
+function showBag() {
+  bag = document.getElementById("shoppingBag");
+  bag.style.removeProperty("display");
+}
+
+// Event-Listener für Änderungen der Fenstergröße
+window.addEventListener("resize", function () {
+  // Prüfe, ob die Fensterbreite größer als 700px ist
+  if (window.innerWidth > 700) {
+    // Wenn ja, rufe die Funktion showBag() auf, um die Eigenschaft zu entfernen
+    showBag();
+  } else {
+    // Wenn das Fenster kleiner oder gleich 700px ist und die Div sichtbar ist, rufe responsiveMenuBagClose() auf
+    const bag = document.getElementById("shoppingBag");
+    if (bag.style.display !== "none") {
+      responsiveMenuBagClose();
+    }
+  }
+});
