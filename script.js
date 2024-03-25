@@ -54,123 +54,83 @@ let foodListDinkel = [
 ];
 //////////////////////////////Dinkel-Arrays///////////////////////////////////////
 
-function cardFullcorn() {
+function updateCard(foodList, incredientList, headlineIndex) {
   const card = document.getElementById("menu");
-  const headline = headlineList[0];
-  card.innerHTML = "";
-  card.innerHTML = `
-  <h2>${headline}</h2>`;
-  for (let i = 0; i < foodListFullcorn.length; i++) {
-    const food = foodListFullcorn[i];
-    const incredient = incredientListFullcorn[i];
+  const headline = headlineList[headlineIndex];
+  card.innerHTML = `<h2>${headline}</h2>`;
+  for (let i = 0; i < foodList.length; i++) {
+    const food = foodList[i];
+    const incredient = incredientList[i];
     const price = priceList[i];
     const img = imgList[i];
     card.innerHTML += `
     <div class="menu">
-      <div class="menu-card">
-        <div class="card-header">
-          <h3>${food}</h3>
-          <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
-        </div>
-        <div class="card-main">
-          <div class="card-text">
-            <div class="text-description">
-              <span>${incredient}</span>
-              <span>Wahlweise als 15cm oder 30cm Sandwich</span>
-            </div>
-            <span><b>${price} €</b></span>
+    <div class="menu-card">
+      <div class="card-header">
+        <h3>${food}</h3>
+        <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
+      </div>
+      <div class="card-main">
+        <div class="card-text">
+          <div class="text-description">
+            <span>${incredient}</span>
+            <span>Wahlweise als 15cm oder 30cm Sandwich</span>
           </div>
-          <img src="${img}" alt="" />
+          <span><b>${price} €</b></span>
         </div>
+        <img src="${img}" alt="" />
       </div>
-      </div>
-    `;
+    </div>
+    </div>`;
   }
+}
+
+function cardFullcorn() {
+  updateCard(foodListFullcorn, incredientListFullcorn, 0);
 }
 
 function cardWheat() {
-  const card = document.getElementById("menu");
-  const headline = headlineList[1];
-  card.innerHTML = "";
-  card.innerHTML = `<h2>${headline}</h2>`;
-  for (let i = 0; i < foodListWheat.length; i++) {
-    const food = foodListWheat[i];
-    const incredient = incredientListWheat[i];
-    const price = priceList[i];
-    const img = imgList[i];
-    card.innerHTML += `
-    <div class="menu">
-    <div class="menu-card">
-      <div class="card-header">
-        <h3>${food}</h3>
-        <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
-      </div>
-      <div class="card-main">
-        <div class="card-text">
-          <div class="text-description">
-            <span>${incredient}</span>
-            <span>Wahlweise als 15cm oder 30cm Sandwich</span>
-          </div>
-          <span><b>${price} €</b></span>
-        </div>
-        <img src="${img}" alt="" />
-      </div>
-    </div>
-    </div>
-  `;
-  }
+  updateCard(foodListWheat, incredientListWheat, 1);
 }
 
 function cardDinkel() {
-  const card = document.getElementById("menu");
-  const headline = headlineList[2];
-  card.innerHTML = "";
-  card.innerHTML = `<h2>${headline}</h2>`;
-  for (let i = 0; i < foodListDinkel.length; i++) {
-    const food = foodListDinkel[i];
-    const incredient = incredientListDinkel[i];
-    const price = priceList[i];
-    const img = imgList[i];
-    card.innerHTML += `
-    <div class="menu">
-    <div class="menu-card">
-      <div class="card-header">
-        <h3>${food}</h3>
-        <img onclick="addToBasket('${food}', ${price})" src="img/plus-circle.svg" alt="" />
-      </div>
-      <div class="card-main">
-        <div class="card-text">
-          <div class="text-description">
-            <span>${incredient}</span>
-            <span>Wahlweise als 15cm oder 30cm Sandwich</span>
-          </div>
-          <span><b>${price} €</b></span>
-        </div>
-        <img src="${img}" alt="" />
-      </div>
-    </div>
-    </div>
-  `;
-  }
+  updateCard(foodListDinkel, incredientListDinkel, 2);
 }
 
 function addToBasket(food, price) {
   shoppingBagNone();
-  const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
+  const index = basketFood.indexOf(food);
 
-  if (index !== -1) {
-    // Wenn das Essen bereits im Warenkorb ist, erhöhe die Menge
-    basketAmount[index]++;
+  if (index !== -1) { // prüft ob schon vorhanden
+    basketAmount[index]++; // wenn ja, dann erhöhe um 1
   } else {
-    // Ansonsten füge das Essen zum Warenkorb hinzu
-    basketFood.push(food);
+    basketFood.push(food); // wenn nein, dann füge alles hinzu
     basketPrices.push(price);
     basketAmount.push(1);
   }
 
-  // Aktualisiere die Anzeige des Warenkorbs
-  updateBasketDisplay();
-  if (deliveryOption === "pickup") {
+  updateBasket();
+}
+
+function removeToBasket(food, price) {
+  const index = basketFood.indexOf(food);
+
+  if (index !== -1) { // prüft ob schon vorhanden
+    basketAmount[index]--;  // wenn ja, dann verringere um 1
+  }
+
+  if (basketAmount[index] < 1) { // wenn kleiner 1, dann lösche alles
+    basketFood.splice(index, 1);
+    basketPrices.splice(index, 1);
+    basketAmount.splice(index, 1);
+  }
+
+  updateBasket();
+}
+
+function updateBasket() {
+  updateBasketDisplay(); 
+  if (deliveryOption === "pickup") { // prüft ob Abholen oder Liefern
     practialSum("pickup");
   } else {
     practialSum("deliver");
@@ -184,29 +144,6 @@ function shoppingBagNone() {
   fillBag.classList.remove("display-none");
 }
 
-function removeToBasket(food, price) {
-  const index = basketFood.indexOf(food); // Überprüft, ob das Essen bereits im Warenkorb ist
-
-  if (index !== -1) {
-    // Wenn das Essen bereits im Warenkorb ist, verringer die Menge
-    basketAmount[index]--;
-  }
-
-  if (basketAmount[index] < 1) {
-    basketFood.splice(index, 1);
-    basketPrices.splice(index, 1);
-    basketAmount.splice(index, 1);
-  }
-
-  // Aktualisiere die Anzeige des Warenkorbs
-  updateBasketDisplay();
-  if (deliveryOption === "pickup") {
-    practialSum("pickup");
-  } else {
-    practialSum("deliver");
-  }
-}
-
 function updateBasketDisplay() {
   const basketList = document.getElementById("shopping-bag-with-food");
   basketList.innerHTML = "";
@@ -215,7 +152,13 @@ function updateBasketDisplay() {
     const food = basketFood[i];
     const price = basketPrices[i];
     const amount = basketAmount[i];
-    basketList.innerHTML += `
+    basketList.innerHTML += generateBasketItemHTML(food, price, amount);
+  }
+  basketList.innerHTML += generateBasketSumHTML();
+}
+
+function generateBasketItemHTML(food, price, amount) {
+  return `
     <div class="kasten">
       <div class="space-between">
         <span class="text-decoration">${food}</span>
@@ -225,32 +168,36 @@ function updateBasketDisplay() {
       <div class="space-between">
         <a class="notiz" href="#">Anmerkung hinzufügen</a>
         <div class="icons-bag">
-        <img onclick="removeToBasket('${food}','${price}')" src="img/dash-circle.svg" alt="" />
-        <span class="margin">${amount}</span>
-        <img onclick="addToBasket('${food}','${price}')" src="img/plus-circle.svg" alt="" />
+          <img onclick="removeToBasket('${food}','${price}')" src="img/dash-circle.svg" alt="" />
+          <span class="margin">${amount}</span>
+          <img onclick="addToBasket('${food}','${price}')" src="img/plus-circle.svg" alt="" />
         </div>
       </div>
     </div> 
     <div class="spacer"></div>
-    `;
-  }
-  basketList.innerHTML += `<div class="sum">
-  <div class="row">
-<div class="space-between">
-    <span>Zwischensumme</span>
-    <span id="sum"></span>
-  </div>
-  <div class="space-between">
-    <span>Lieferkosten</span>
-    <span id="deliverycost">4,99 €</span>
-  </div>
-  <div class="space-between">
-    <span><b>Gesamt</b></span>
-    <span id="total" ><b>Preis</b></span>
-  </div>
-  </div>
-  <button onclick="thanksSite()" class="buy-button">Bezahlen</button>
-</div>`;
+  `;
+}
+
+function generateBasketSumHTML() {
+  return `
+    <div class="sum">
+      <div class="row">
+        <div class="space-between">
+          <span>Zwischensumme</span>
+          <span id="sum"></span>
+        </div>
+        <div class="space-between">
+          <span>Lieferkosten</span>
+          <span id="deliverycost">4,99 €</span>
+        </div>
+        <div class="space-between">
+          <span><b>Gesamt</b></span>
+          <span id="total" ><b>Preis</b></span>
+        </div>
+      </div>
+      <button onclick="thanksSite()" class="buy-button">Bezahlen</button>
+    </div>
+  `;
 }
 
 function practialSum() {
@@ -272,7 +219,7 @@ function practialSum() {
 }
 
 function totalSum(x) {
-  const sum = basketSum.reduce((total, price) => total + price, 0);
+  const sum = basketSum.reduce((total, price) => total + price, 0); // berechnet Summe aus Array basketSum
   if (x === "deliver") {
     const totalSum = sum + 4.99;
     const totalSumElement = document.getElementById("total");
@@ -311,60 +258,53 @@ function thanksSite() {
   window.open("thanks.html", "_blank");
 }
 
+function toggleElementDisplay(element, displayValue) {
+  element.style.removeProperty("display"); // löscht einzelne Eigenschaft aus Klasse
+  element.style.setProperty("display", displayValue); // setzt einzelne Eigenschaft in Klasse
+}
+
 function responsiveMenuShow() {
-  bag = document.getElementById("shoppingBag");
-  toggle = document.getElementById("shoppingBagToggle");
-  header = document.getElementById("header");
-  container = document.getElementById("container");
+  const bag = document.getElementById("shoppingBag");
+  const toggle = document.getElementById("shoppingBagToggle");
+  const header = document.getElementById("header");
+  const container = document.getElementById("container");
 
-  // Ausblenden des Toggle-Elements, wenn das Menü geöffnet wird
   toggle.classList.add("display-none");
-
-  bag.style.removeProperty("display");
-  bag.style.setProperty("display", "flex");
+  toggleElementDisplay(bag, "flex");
   bag.classList.add("shoppingBagResponsive");
   header.classList.add("display-none");
   container.classList.add("display-none");
 }
 
 function responsiveMenuBagClose() {
-  bag = document.getElementById("shoppingBag");
-  toggle = document.getElementById("shoppingBagToggle");
-  header = document.getElementById("header");
-  container = document.getElementById("container");
+  const bag = document.getElementById("shoppingBag");
+  const toggle = document.getElementById("shoppingBagToggle");
+  const header = document.getElementById("header");
+  const container = document.getElementById("container");
 
-  // Prüfe, ob das Fenster eine Breite von maximal 700px hat
-  if (window.matchMedia("(max-width: 700px)").matches) {
-    bag.style.removeProperty("display");
-    bag.style.setProperty("display", "none");
+  if (window.matchMedia("(max-width: 700px)").matches) { //überprüft ob Fenster unter 700px ist
+    toggleElementDisplay(bag, "none");
   }
 
   bag.classList.remove("shoppingBagResponsive");
   toggle.classList.remove("display-none");
   header.classList.remove("display-none");
   container.classList.remove("display-none");
-
-  // Manuell entferne die Klasse 'display-none' vom Container
   document.querySelector(".responsiveMenu").classList.remove("display-none");
 }
 
-// Funktion, die die Eigenschaft 'display: none;' entfernt
 function showBag() {
-  bag = document.getElementById("shoppingBag");
+  const bag = document.getElementById("shoppingBag");
   bag.style.removeProperty("display");
 }
 
-// Event-Listener für Änderungen der Fenstergröße
-window.addEventListener("resize", function () {
-  // Prüfe, ob die Fensterbreite größer als 700px ist
-  if (window.innerWidth > 700) {
-    // Wenn ja, rufe die Funktion showBag() auf, um die Eigenschaft zu entfernen
+function handleWindowResize() {
+  const bag = document.getElementById("shoppingBag");
+  if (window.innerWidth > 700) { // prüft ob fenster größer 700px 
     showBag();
-  } else {
-    // Wenn das Fenster kleiner oder gleich 700px ist und die Div sichtbar ist, rufe responsiveMenuBagClose() auf
-    const bag = document.getElementById("shoppingBag");
-    if (bag.style.display !== "none") {
-      responsiveMenuBagClose();
-    }
+  } else if (bag.style.display !== "none") { // wenn nein, dann wird geprüft ob display=none ist
+    responsiveMenuBagClose();
   }
-});
+}
+
+window.addEventListener("resize", handleWindowResize); //reagiert auf Fensterbewegung
