@@ -12,6 +12,8 @@ let basketPrices = [];
 let basketAmount = [];
 let basketSum = [];
 
+let deliveryOption = "deliver";
+
 //////////////////////////////Vollkorn-Arrays/////////////////////////////////////
 let incredientListFullcorn = [
   "Vollkorn-Bun, Salat, Gurke, Tomate, Schinken, Zwiebel, Sauce",
@@ -56,7 +58,8 @@ function cardFullcorn() {
   const card = document.getElementById("menu");
   const headline = headlineList[0];
   card.innerHTML = "";
-  card.innerHTML = `<h2>${headline}</h2>`;
+  card.innerHTML = `
+  <h2>${headline}</h2>`;
   for (let i = 0; i < foodListFullcorn.length; i++) {
     const food = foodListFullcorn[i];
     const incredient = incredientListFullcorn[i];
@@ -167,7 +170,11 @@ function addToBasket(food, price) {
 
   // Aktualisiere die Anzeige des Warenkorbs
   updateBasketDisplay();
-  practialSum();
+  if (deliveryOption === "pickup") {
+    practialSum("pickup");
+  } else {
+    practialSum("deliver");
+  }
 }
 
 function shoppingBagNone() {
@@ -193,7 +200,11 @@ function removeToBasket(food, price) {
 
   // Aktualisiere die Anzeige des Warenkorbs
   updateBasketDisplay();
-  practialSum();
+  if (deliveryOption === "pickup") {
+    practialSum("pickup");
+  } else {
+    practialSum("deliver");
+  }
 }
 
 function updateBasketDisplay() {
@@ -231,14 +242,14 @@ function updateBasketDisplay() {
   </div>
   <div class="space-between">
     <span>Lieferkosten</span>
-    <span>4,99 €</span>
+    <span id="deliverycost">4,99 €</span>
   </div>
   <div class="space-between">
     <span><b>Gesamt</b></span>
     <span id="total" ><b>Preis</b></span>
   </div>
   </div>
-  <button class="buy-button">Bezahlen</button>
+  <button onclick="thanksSite()" class="buy-button">Bezahlen</button>
 </div>`;
 }
 
@@ -253,12 +264,58 @@ function practialSum() {
   const sum = basketSum.reduce((total, price) => total + price, 0);
   const sumElement = document.getElementById("sum");
   sumElement.textContent = sum.toFixed(2) + " €";
-  totalSum();
+  if (document.getElementById("button2").classList.contains("markbuttons")) {
+    totalSum("pickup");
+  } else {
+    totalSum("deliver");
+  }
 }
 
-function totalSum() {
+function totalSum(x) {
   const sum = basketSum.reduce((total, price) => total + price, 0);
-  const totalSum = sum + 4.99;
-  const totalSumElement = document.getElementById("total");
-  totalSumElement.textContent = totalSum.toFixed(2) + " €";
+  if (x === "deliver") {
+    const totalSum = sum + 4.99;
+    const totalSumElement = document.getElementById("total");
+    totalSumElement.textContent = totalSum.toFixed(2) + " €";
+  }
+
+  if (x === "pickup") {
+    const totalSum = sum;
+    const totalSumElement = document.getElementById("total");
+    totalSumElement.textContent = totalSum.toFixed(2) + " €";
+    document.getElementById("deliverycost").innerHTML = `---`;
+  }
+}
+
+function colorButton(x) {
+  const buttonDeliver = document.getElementById("button1");
+  const buttonPickup = document.getElementById("button2");
+  if (x === "deliver") {
+    buttonDeliver.classList.add("markbuttons");
+    buttonPickup.classList.remove("markbuttons");
+    document.getElementById("deliverycost").innerHTML = `4.99 €`;
+    deliveryOption = "deliver";
+  }
+
+  if (x === "pickup") {
+    buttonDeliver.classList.remove("markbuttons");
+    buttonPickup.classList.add("markbuttons");
+    document.getElementById("deliverycost").innerHTML = `---`;
+    deliveryOption = "pickup";
+  }
+
+  totalSum(deliveryOption);
+}
+
+function thanksSite() {
+  window.open("thanks.html", "_blank");
+}
+
+function responsiveMenuShow() {
+  bag = document.getElementById("shoppingBag");
+  toggle = document.getElementById('shoppingBagToggle');
+  bag.style.removeProperty("display");
+  bag.style.setProperty('display', 'flex');
+  bag.classList.add("shoppingBagResponsive");
+  toggle.classList.add('display-none')
 }

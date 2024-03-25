@@ -45,7 +45,7 @@ header img {
 }
 
 .shoppingButtons {
-  background-color: aqua;
+  background-color: red;
   display: flex;
 }
 
@@ -231,7 +231,20 @@ header img {
 
 footer {
   background-color: grey;
-  height: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer a {
+  color: rgb(224, 217, 217);
+  text-decoration: none;
+}
+
+footer a:hover {
+  opacity: 0.6;
+  text-decoration: underline;
 }
 
 .deliverybuttons {
@@ -244,7 +257,7 @@ footer {
   margin-bottom: 40px;
   margin-top: 16px;
   margin-left: 16px;
-  margin-right:16px;
+  margin-right: 16px;
 }
 
 .shopping-button-delivery {
@@ -297,7 +310,6 @@ footer {
   cursor: pointer;
 }
 
-
 .icons-bag {
   display: flex;
   justify-content: center;
@@ -307,6 +319,8 @@ footer {
 .bag-list {
   margin-left: 20px;
   margin-right: 20px;
+  overflow-y: auto;
+  padding-bottom: 20px;
 }
 
 .spacer {
@@ -337,7 +351,51 @@ footer {
   cursor: pointer;
 }
 
-@media(max-width: 1090px) {
+.markbuttons {
+  background-color: red;
+  color: white;
+}
+
+.responsiveMenu {
+  position: fixed;
+  right: 20px;
+  top: 50vh;
+  z-index: 999; /* Stelle sicher, dass der Button über anderen Inhalten liegt */
+}
+
+.responsiveButton {
+  height: 50px;
+  border-radius: 90px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.responsiveButton:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#shoppingBagToggle {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999; /* Stelle sicher, dass der Button über anderen Inhalten liegt */
+}
+
+.shoppingBagResponsive {
+  display: flex;
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+background-color: white;
+}
+
+@media (max-width: 1090px) {
   .space-between {
     display: flex;
     flex-direction: column;
@@ -370,7 +428,7 @@ footer {
   }
 }
 
-@media(max-width:850px) {
+@media (max-width: 850px) {
   .buttons a {
     margin-left: 0px;
     font-size: 18px;
@@ -385,7 +443,7 @@ footer {
   }
 
   .card-main img {
-    width:150px;
+    width: 150px;
     height: 100px;
   }
 
@@ -394,9 +452,13 @@ footer {
   }
 }
 
-@media(max-width:700px) {
+@media (max-width: 700px) {
   .shoppingbag {
     display: none;
+  }
+
+  .display-flex {
+    display: flex;
   }
 
   .menu-container {
@@ -408,6 +470,6 @@ footer {
   }
 
   .container {
-    width: 100%;
+    width: 100vw;
   }
-}
+  }

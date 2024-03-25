@@ -6,7 +6,6 @@
     <title>Abholando</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/vnd.microsoft.icon" href="img/favicon.ico" />
-
     <script src="script.js"></script>
   </head>
   <body onload="cardFullcorn()">
@@ -31,8 +30,8 @@
                 <button><img src="img/heart.svg" alt="" /></button>
               </div>
             </div>
-            <a class="icons" href="">
-              <img src="img/star-fill.svg" alt="" /> 4 von 5 Sternen</a
+            <a class="icons" href=""
+              ><img src="img/star-fill.svg" alt="" /> 4 von 5 Sternen</a
             >
             <div class="icon-bike">
               <img src="img/bicycle.svg" alt="" />
@@ -48,15 +47,34 @@
             </div>
           </div>
         </div>
-
         <section id="menu" class="menu-container"></section>
       </div>
 
-      <div class="shoppingbag">
-        <h2>Warenkorb</h2>
+      <div id="shoppingBag" class="shoppingbag">
+        <div class="imgResponsive">
+          <h2>Warenkorb</h2>
+          <img
+            onclick="responsiveMenuBagClose()"
+            class="responsiveImg"
+            src="img/plus-circle.svg"
+            alt=""
+          />
+        </div>
         <div class="deliverybuttons">
-          <button class="shopping-button-delivery">Lieferung</button>
-          <button class="shopping-button-delivery">Abholung</button>
+          <button
+            id="button1"
+            onclick="colorButton('deliver')"
+            class="shopping-button-delivery markbuttons"
+          >
+            Lieferung
+          </button>
+          <button
+            id="button2"
+            onclick="colorButton('pickup')"
+            class="shopping-button-delivery"
+          >
+            Abholung
+          </button>
         </div>
 
         <div id="shopping-bag-none-food">
@@ -67,12 +85,23 @@
             Speisekarte hinzu und bestelle dein Essen.</span
           >
         </div>
-
-        <div id="shopping-bag-with-food" class="bag-list display-none">
-        </div>
+        <div id="shopping-bag-with-food" class="bag-list display-none"></div>
       </div>
     </div>
-
-    <footer></footer>
+    <div id="shoppingBagToggle" class="responsiveMenu">
+      <img
+        onclick="responsiveMenuShow()"
+        class="responsiveButton"
+        src="img/arrow-bar-left.svg"
+      />
+    </div>
+    <footer id="footer">
+      <a href="#">Ein Restaurant empfehlen</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Jobs</a>
+      <a href="#">Impressum</a>
+      <a href="#">Kontakt</a>
+    </footer>
   </body>
 </html>
